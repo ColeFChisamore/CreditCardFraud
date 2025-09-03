@@ -1,3 +1,5 @@
 # CreditCardFraud
 
-Using Jupyter notebook to code in Python, I work with data from the Top 250 movies on IMDb (http://www.imdb.com/chart/top). I scrape the data from IMDb using a request, and collect the text I needed using Beautiful Soup. I parse the text into each individual movie and further into each piece of info by using regular expressions to find patterns. I collect this data into Pandas dataframe and then use Seaborn to plot out interesting information and draw conclusions.
+Using Jupyter notebook to code in Python, I work with credit card fraud data to create an AI model to detect fraudulent claims.
+
+I first look through the data to to compare real and fraudulent claims to find any major differences between their distributions. Then I start by creating a Random Forest Classifier model (from sklearn) and training it on 80% of the data. I analyze the results and create plots and visualizations that help me to see how well the model performed. I then go on to attempt undersampling on the training data in order to reduce the number of mislabeled claims in the test data.
