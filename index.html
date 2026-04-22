@@ -77,13 +77,16 @@ import joblib as jl</pre></div>
             <div class="step">
                 <div class="name">Step 2: Importing and Inspecting the Data</div>
                 <div class="explain">
-                    Explanation of step 2
+                    Before I create any models, I need to gather my imported data and do a close inspection of the content to find any problems or note any patterns before working ahead.
                 </div>
                 <div class="section">
                     <div class="text">
                         <div class="subname">Step 2.1: Importing and Forming the Data</div>
                         <div class="explain">
-                            Explaination of step.
+                            First I read in the .csv file containing the credit card claim data that I already have downloaded, and save it in a dataframe. Then I create two more dataframes containing the data for claims that were fraudulent, and claims that were valid.
+                        </div>
+                        <div class="explain">
+                            I also calculate the percent of claims that are fraud, and find that only about 0.173% of the total claims are fraudulent. This could be problematic in the future, since the model may care less about frauds due to their rarity.
                             <ul></ul>
                         </div>
                     </div>
@@ -118,7 +121,11 @@ print(len(fraud)/len(df))</pre></div>
                     <div class="text">
                         <div class="subname">Step 2.2: Visualizing the Data</div>
                         <div class="explain">
-                            Explain this.
+                            Here I have printed out the distribution statistics for both the fraud and valid distributions, as well as a histogram to visualize the distribution more clearly. I cut the range to stay below 500 since the majority of information lies here. 
+                        </div>
+                        <div class="explain">
+                            From both the statistics and the graph, I can see that the fraudulent claims tend to have a higher amount than valid ones. Both claims seem to follow an exponential distribution, but of course the real claims fit closer due to their large number. However I can also see that the fraudulent claims seem have certain spots that are unusually high around 0, 90, and 320, as if fraudulent claims tend to be made at these values. Because of these spikes the frauds actually have a lower first and second quartile, but a much higher third. I will have to see how the machine learning model deals with this to differentiate between real and fraud.
+                            <ul></ul>
                         </div>
                     </div>
                     <div class="notebook-container">
