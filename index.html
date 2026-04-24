@@ -183,13 +183,16 @@ Name: Amount, dtype: float64
             <div class="step">
                 <div class="name">Step 3: Creating the First Model</div>
                 <div class="explain">
-                    Explanation.
+                    Now that I have set up the data and gotten a deeper look into the underlying patterns, I can begin writing the code for my first classifier model.
                 </div>
                 <div class="section">
                     <div class="text">
                         <div class="subname">Step 3.1: Preparing For the First Model</div>
                         <div class="explain">
-                            Explain here.
+                            First off, I need to import the machine learning libraries that I will be using to train this model. From the sklearn library (mentioned in step 1), I will import both the <code>RandomForestClassifier</code> and the <code>train_test_split</code> functions. The <code>RandomForestClassifier</code> is the AI classifier model itself that I will need to train, and the <code>train_test_split</code> is a function that will allow me to easily separate the training and testing data that I will feed to my model. 
+                        </div>
+                        <div class="explain">
+                            But before I begin training, I need to set up the training data (used to train the model) and test data (used to evaluate the model). I have to separate the training and testing data to prevent the model from overfitting and memorizing this dataset rather than finding the underlying patterns. I begin by splitting the claims data into the explanatory <code>x</code> column and the response <code>y</code> column. Then, using the function I just imported, I split these columns into the training set and test set at a 4:1 ratio. This ratio is commonly used as a balance between having lots to train on while still keeping enough to test with afterwards.
                             <ul></ul>
                         </div>
                     </div>
@@ -214,7 +217,10 @@ xTrain, xTest, yTrain, yTest = train_test_split(x, y, test_size=0.2, random_stat
                     <div class="text">
                         <div class="subname">Step 3.2: Training the First Model</div>
                         <div class="explain">
-                            Explain here.
+                            Now that everything has been set up, all I have to do is train the model. I start by initializing the random forest classifier, then I run the <code>fit</code> function on my classifier, inputting the training columns that I had created in the previous step. After lots of training, the model is finished and ready to be saved. Fortunately overtraining is not a worry when training random forest classifiers, since averaging is between iterations to prevent this. Now that the model is complete, I can use it to predict the response values (valid or fraud) on my testing column <code>xTest</code>.
+                        </div>
+                        <div class="explain">
+                            I will note that when running this project, I only trained the model once. I wanted to reduce the amount of time it would take to re-run all the code each and every time I wanted to work on this project, and this part would take the most time by far. So when I would return to the project to continue my work, I would simply load the saved model from my files.
                             <ul></ul>
                         </div>
                     </div>
@@ -248,7 +254,10 @@ yPred = rfc.predict(xTest)</pre></div>
                     <div class="text">
                         <div class="subname">Step 3.3: Examining the First Model</div>
                         <div class="explain">
-                            Explain here.
+                            After training the random forest classifier model and using it on the test data to measure how well it performs, I find that it correctly predicts about 99.95% of the cases (accuracy). Furthermore when the model predicts fraud, it is correct in its prediction 92.13% of the time (precision). However when the claim is actually fraud, it only correctly identifies this 81.19% of the time (recall). This last statistic (recall) is the most important one for my situation, since I care most about detecting when a fraud occurs with my model. Yet I could also consider the F1 score of 86.32%, which is a balance between the precision and the recall. The confusion matrix shows that there were 7 false positives (upper right) and 19 false negatives (bottom left). It seems as though these incorrect labels are insignificant compared to the true negative corner with 56854, but this is why it is important to track the specific statistics.
+                        </div>
+                        <div class="explain">
+
                             <ul></ul>
                         </div>
                     </div>
