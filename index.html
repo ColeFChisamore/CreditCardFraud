@@ -323,13 +323,13 @@ cmd.plot()</pre></div>
             <div class="step">
                 <div class="name">Step 4: Finding the Right Real:Fraud Claims Ratio</div>
                 <div class="explain">
-                    Explanation of step 4.
+                    As mentioned in step 2, the dataset has such a small number of fraudulent claims. It will be difficult for the model to get a low recall without adjusting the sampling. I will attempt to try different ratios of fraud:valid claims in sampling the X and Y for the training data, and see which ones give a good recall value without lowering precision or accuracy too far. I will do this by undersampling the valid claim, while maintaining every fraud claim.
                 </div>
                 <div class="section">
                     <div class="text">
                         <div class="subname">Step 4.1: A Quick First Sweep of Ratios</div>
                         <div class="explain">
-                            I am quickly sweeping over a wide range of ratios, growing with each step.
+                            To test which ratios work best, I will go through many ratios from 1:1 up to 1:500. I will increment up slowly (+0.1) to begin with, but take bigger steps (+10) as the ratio becomes more one-sided. At each step I will quickly train a new tree, use it to make predictions on the test set, and then measure and save various statistics in a dataframe. Basically, I am repeating step 3 for each of the ratios on the way.
                             <ul></ul>
                         </div>
                     </div>
@@ -734,7 +734,8 @@ statsDf = pd.DataFrame(data = statsData)</pre></div>
                     <div class="text">
                         <div class="subname">Step 4.2: Examining the First Sweep</div>
                         <div class="explain">
-                            Explain what I see.
+                            Taking the data I had collected in step 4.1, I organize it into a line graph showing the different statistics and how they changed from ratios 1:1 to 500:1. At lower ratios the recall is very high, but the precision is very low. This makes sense since the model focuses a lot more on the fraudulent claims, but has less of the actual data to work with. These statistics begin to converge after the 100:1, while still maintaining a relatively high recall value. Though recall is an important statistic I can't justify keeping a low precision, so I will try running through different ratios again but with more focus between 100:1 and 500:1.
+                            <ul></ul>
                         </div>
                     </div>
                     <div class="notebook-container">
@@ -761,7 +762,8 @@ plt.show()
                     <div class="text">
                         <div class="subname">Step 4.3: A Deeper Second Sweep</div>
                         <div class="explain">
-                            Explain what I see.
+                            I am repeating the same procedure of step 4.1, but instead incrementing evenly with steps of size 2 from ratios 100:1 to 500:1. This is to get finer detail on the ratios which obtained better results in step 4.2.
+                            <ul></ul>
                         </div>
                     </div>
                     <div class="notebook-container">
@@ -1185,7 +1187,11 @@ statsDf.to_csv("statsDf.csv", index=False)</pre></div>
                     <div class="text">
                         <div class="subname">Step 4.4: Examining the Second Sweep</div>
                         <div class="explain">
-                            Explain what I see.
+                            I start by creating the same kind of graph as in step 4.2, showing the statistics obtained by the ratios from 100:1 to 500:1. However I've also included a rolling average of the F1 value, so that I can have a statistic that is resilient to sudden changes or "lucky" training sets. 
+                        </div>
+                        <div class="explain">
+                            I can see that the rolling average grows higher and higher throughout the ratios, but also has a peak around the 200:1 mark. This first peak is due to the fact that recall reaches its highest point. The actual highest rolling average point is reached at 538:1 (219*2+100). Though I care most about recall, I still feel that the rolling average at 538:1 is enough of an increase that I will choose this ratio over 200:1. Also, the high rolling average around 200:1 doesn't stay for long, and is perhaps not that reliable.
+                            <ul></ul>
                         </div>
                     </div>
                     <div class="notebook-container">
