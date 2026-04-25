@@ -1235,13 +1235,13 @@ statsDf['Rolling Average'].idxmax()</pre></div>
             <div class="step">
                 <div class="name">Step 5: Creating the Second Model</div>
                 <div class="explain">
-                    Explanation.
+                    Now that I have found an optimal valid:fraud ratio at which to train with, I can create the second model. I will repeat the same parts of step 3, but this time ensuring that the valid:fraud ratio is closer to 538:1.
                 </div>
                 <div class="section">
                     <div class="text">
                         <div class="subname">Step 5.1: Preparing For the Second Model</div>
                         <div class="explain">
-                            Explain here.
+                            Just as in step 3.1 I need to split the data into explanatory and response, then I use the <code>train_test_split</code> function to obtain my training and testing columns. I also need to add a step in which I ensure the data has the correct ratio. I do this by taking the entire set of fraudulent claims (492 of them), then taking a random subset of 264696 (492*538) of the valid claims, and mixing both of them together to obtain the new dataset.
                             <ul></ul>
                         </div>
                     </div>
@@ -1263,7 +1263,7 @@ xTrain2, xTest2, yTrain2, yTest2 = train_test_split(x2, y2, test_size=0.2, rando
                     <div class="text">
                         <div class="subname">Step 5.2: Training the Second Model</div>
                         <div class="explain">
-                            Explain here.
+                            I train my second model just as I did my first, by initialiing the <code>RandomForestClassifier</code> and using the <code>fit</code> function on my training columns. I saved the model so that I need only load it in each future session.
                             <ul></ul>
                         </div>
                     </div>
@@ -1294,7 +1294,7 @@ yPredUS = rfcUS.predict(xTest)</pre></div>
                     <div class="text">
                         <div class="subname">Step 5.3: Examining the Second Model</div>
                         <div class="explain">
-                            Explain here.
+                            After training the second classifier model and seeing how well it performs on the test data, I find an accuracy of 99.99%, a precision of 98.02%, and a recall of 98.02%. I also obtain an F1 score of 98.02%. The confusion matrix shows that there were 2 false positives (upper right) and 2 false negatives (bottom left). Overall this seems like a huge improvement over the original model, but I will compare them more closely in the next step.
                             <ul></ul>
                         </div>
                     </div>
