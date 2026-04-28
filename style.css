@@ -414,6 +414,9 @@ Changes are made when the width of the page is more than 1200px
         width:50%;
         max-height:50vh;
     }
+    .step .long{
+        max-height:100vh;
+    }
 }
 
 
